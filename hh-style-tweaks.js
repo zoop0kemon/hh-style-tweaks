@@ -1583,7 +1583,6 @@
                     height: 78%;
                 }
             `)
-
             this.insertRule(`
                 #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .daily-goals-objective {
                     width: auto;
@@ -1648,8 +1647,8 @@
             }
             `)
             this.insertRule(`
-            #daily_goals .daily-goals-row .daily-goals-left-part .progress-section .daily-goals-progress-bar {
-                overflow: hidden;
+            #daily_goals .daily-goals-row .daily-goals-left-part .progress-section .daily-goals-progress-bar .progress-bar-fill {
+                border-radius: 5px;
             }
             `)
             this.insertRule(`
@@ -1700,6 +1699,161 @@
         }
     }
 
+    class DailyMissionsRestyle extends STModule {
+        constructor () {
+            const baseKey = 'dailyMissions'
+            const configSchema = {
+                baseKey,
+                default: true,
+                label: 'Daily Missions restyle'
+            }
+            super({name: baseKey, configSchema})
+        }
+
+        shouldRun() {return currentPage.includes('activities')}
+
+        injectCss() {
+            this.insertRule(`
+                #missions>div #missions_counter .missions-counter-rewards {
+                    display: none;
+                }
+            `)
+            //mission wrap
+            this.insertRule(`
+                #missions>div .missions_wrap {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-gap: 5px;
+                    align-content: start;
+                }
+            `)
+            //mission object
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object {
+                    height: 104px;
+                    margin-bottom: 0px;
+                }
+            `)
+            //mission image
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_image {
+                    margin-top: 15px;
+                    margin-left: 2px;
+                    margin-right: 0px;
+                    width: 80px;
+                    height: 80px;
+                    border: 2px solid #fff;
+                }
+            `)
+            //mission details
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_details {
+                    width: 150px;
+                    padding: 4px 6px;
+                }
+            `)
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_details h1 {
+                    position: absolute;
+                    top: -4px;
+                    left: 4px;
+                    font-size: 13px;
+                }
+            `)
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_details p {
+                    font-size: 9px;
+                    margin-top: 12px;
+                    line-height: 10px;
+                }
+            `)
+            //mission reward
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_reward {
+                    width: auto;
+                    height: 50%;
+                    padding-left: 0px;
+                    padding-top: 4px;
+                }
+            `)
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_reward .reward_wrap .slot {
+                    margin-right: 4px;
+                }
+            `)
+            //mission button
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_button {
+                    font-size: 12px;
+                    height: 50%;
+                    position: absolute;
+                    right: 4px;
+                    bottom: 4px;
+                }
+            `)
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_button .duration {
+                    top: 0px;
+                    left: 0px;
+                }
+            `)
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_button button {
+                    margin-top: 0px;
+                    position: initial;
+                }
+            `)
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_button .hh_bar {
+                    left: 1px;
+                }
+            `)
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_button .hh_bar .backbar {
+                    top: 10px;
+                    width: 90px;
+                }
+            `)
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_button .hh_bar .text {
+                    top: 0px;
+                    letter-spacing: 0px;
+                    font-size: 10px;
+                }
+            `)
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_button>button[rel=finish] {
+                    padding: 3px 2px;
+                    line-height: 14px;
+                    width: 90px;
+                    height: 32px;
+                    margin-top: 20px;
+                    font-size: 11px;
+                }
+            `)
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_button>button[rel=finish]>span[cur]::before {
+                    width: 14px;
+                    height: 14px;
+                }
+            `)
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_button>button[rel=finish]>span {
+                    line-height: inherit;
+                    margin-top: -2px;
+                }
+            `)
+            this.insertRule(`
+                #missions>div .missions_wrap .mission_object .mission_button>button[rel=claim] {
+                    line-height: 10px;
+                    width: 86px;
+                    height: 40px;
+                    margin-top: 5px;
+                }
+            `)
+        }
+    }
+
     const allModules = [
         new BlessingsButtonAlign(),
         new BonusFlowersOverflow(),
@@ -1733,6 +1887,7 @@
         new MonthlyCardText(),
         new PoVUnclutter(),
         new DailyGoalsRestyle(),
+        new DailyMissionsRestyle(),
     ]
 
     setTimeout(() => {
